@@ -57,6 +57,7 @@ textarea {
   border: none;
   padding: 10px 15px;
   font-size: 1em;
+  text-decoration: none;
 }
 .btn.btn-dark {
   background-color: #000;
@@ -79,10 +80,10 @@ textarea {
 .btn.btn-danger:hover {
   background-color: #dc3545;
 }
-button[disabled]{
+button[disabled] {
   background-color: #aaa;
 }
-.container .error{
+.container .error {
   color: #721c24;
   background-color: #f8d7da;
   border: 1px solid #f5c6cb;

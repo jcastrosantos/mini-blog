@@ -1,13 +1,13 @@
-import { db } from "../firebase/config";
-
 import {
   getAuth,
   createUserWithEmailAndPassword,
   updateProfile,
-  signOut,
+  // signOut,
+  signInWithEmailAndPassword,
 } from "firebase/auth";
 
 import { useState, useEffect } from "react";
+import {app} from "../firebase/config";
 
 export const useAuthentication = () => {
   const [error, setError] = useState(null);
@@ -17,14 +17,14 @@ export const useAuthentication = () => {
   //deal with memory leak
   const [cancelled, setCancelled] = useState(false);
 
-  const auth = getAuth();
+  const auth = getAuth(app);
 
   function checkIfsCancelled() {
     if (cancelled) {
       return;
     }
   }
-
+  //REGISTER
   const createUser = async (data) => {
     checkIfsCancelled();
 
@@ -32,7 +32,7 @@ export const useAuthentication = () => {
     setError(null);
 
     try {
-      const { user } = createUserWithEmailAndPassword(
+      const { user } = await createUserWithEmailAndPassword(
         auth,
         data.email,
         data.password
@@ -42,6 +42,8 @@ export const useAuthentication = () => {
         displayName: data.displayName,
       });
 
+      setLoading(false);
+
       return user;
     } catch (error) {
       console.log(error.message);
@@ -50,17 +52,47 @@ export const useAuthentication = () => {
       let systemErrorMessage;
 
       if (error.message.includes("Password")) {
-        systemErrorMessage = "A senha precisa de 6 caracteres.";
+        systemErrorMessage = "A senha precisa de 6 ou mais caracteres.";
       } else if (error.message.includes("email-already")) {
         systemErrorMessage = "email ja cadastrado.";
       } else {
         systemErrorMessage = "ocorreu um erro, por favor tente mais tarde.";
       }
+      setLoading(false);
       setError(systemErrorMessage);
     }
-
-    setLoading(false);
   };
+  //LOGOUT
+  const logout = () => {
+    checkIfsCancelled();
+
+    auth.signOut();
+  };
+  //LOGIN
+  const login = async (data) => {
+    checkIfsCancelled();
+
+    setLoading(true);
+    setError(null);
+
+    try {
+      await signInWithEmailAndPassword(auth, data.email, data.password);
+      setLoading(false);
+    } catch (error) {
+      console.log("Erro recebido:", error.code);
+      let systemErrorMessage;
+
+      if (error.message.includes("invalid-credential")) {
+        systemErrorMessage = "Dados inválidos. Verifique seu email e senha.";
+      } else {
+        systemErrorMessage =
+          "Houve um problema na conexão com o servidor, tente mais tarde.";
+      }
+      setLoading(false);
+      setError(systemErrorMessage);
+    }
+  };
+  //password recovery
   useEffect(() => {
     return () => setCancelled(true);
   }, []);
@@ -70,5 +102,7 @@ export const useAuthentication = () => {
     createUser,
     error,
     loading,
+    logout,
+    login,
   };
 };
