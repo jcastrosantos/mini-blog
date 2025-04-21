@@ -52,7 +52,9 @@ const Register = () => {
             required
             placeholder="Username"
             value={displayName}
-            onChange={(e) => setDisplayName(e.target.value)}
+            onChange={(e) => {
+              setDisplayName(e.target.value);
+            }}
           />
         </label>
         <label>
@@ -89,7 +91,11 @@ const Register = () => {
           />
         </label>
         {!loading && <button className="btn">sign on</button>}
-        {loading && <button className="btn" disabled>wait...</button>}
+        {loading && (
+          <button className="btn" disabled>
+            wait...
+          </button>
+        )}
         {error && <p className="error">{error}</p>}
       </form>
     </div>
