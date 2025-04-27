@@ -21,6 +21,7 @@ import Register from "./router/Register/Register.jsx";
 import CreatePost from "./router/CreatePost/CreatePost.jsx";
 import Dashboard from "./router/Dashboard/Dashboard.jsx";
 import Search from "./router/Search/Search.jsx";
+import Post from "./router/Post/Post.jsx";
 
 
 function App() {
@@ -49,6 +50,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
               <Route path="/search" element={<Search />} />
+              <Route path="/posts/:id" element={<Post />} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
