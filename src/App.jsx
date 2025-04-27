@@ -9,6 +9,10 @@ import { useAuthentication } from "./hooks/useAuthentication.jsx";
 //CONTEXT
 import { AuthProvider } from "./context/AuthContext.jsx";
 
+//COMPONENTES
+import Navbar from "./components/Navbar.jsx";
+import Footer from "./components/Footer.jsx";
+
 //ROUTER
 import Home from "./router/Home/Home.jsx";
 import About from "./router/About/About.jsx";
@@ -16,10 +20,8 @@ import Login from "./router/Login/Login.jsx";
 import Register from "./router/Register/Register.jsx";
 import CreatePost from "./router/CreatePost/CreatePost.jsx";
 import Dashboard from "./router/Dashboard/Dashboard.jsx";
+import Search from "./router/Search/Search.jsx";
 
-//COMPONENTES
-import Navbar from "./components/Navbar.jsx";
-import Footer from "./components/Footer.jsx";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -46,6 +48,7 @@ function App() {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/about" element={<About />} />
+              <Route path="/search" element={<Search />} />
               <Route
                 path="/login"
                 element={!user ? <Login /> : <Navigate to="/" />}
