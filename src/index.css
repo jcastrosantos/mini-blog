@@ -90,3 +90,20 @@ button[disabled] {
   padding: 5px;
   border-radius: 5px;
 }
+.loading {
+  display: flex;
+  position: relative;
+  animation: is-rotating 1s infinite;
+  border: 6px solid #e5e5e5;
+  border-radius: 50%;
+  border-top-color: #0f730c;
+  height: 50px;
+  width: 50px;
+  margin: 30% 50%;
+}
+
+@keyframes is-rotating {
+  to {
+    transform: rotate(1turn);
+  }
+}

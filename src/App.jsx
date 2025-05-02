@@ -22,7 +22,7 @@ import CreatePost from "./router/CreatePost/CreatePost.jsx";
 import Dashboard from "./router/Dashboard/Dashboard.jsx";
 import Search from "./router/Search/Search.jsx";
 import Post from "./router/Post/Post.jsx";
-
+import EditPost from "./router/EditPost/Editpost.jsx";
 
 function App() {
   const [user, setUser] = useState(undefined);
@@ -37,7 +37,7 @@ function App() {
   }, [auth]);
 
   if (loadingUser) {
-    return <p>Loading...</p>;
+    return <div className="loading"></div>;
   }
 
   return (
@@ -58,6 +58,10 @@ function App() {
               <Route
                 path="/register"
                 element={!user ? <Register /> : <Navigate to="/" />}
+              />
+              <Route
+                path="/posts/edit/:id"
+                element={user ? <EditPost /> : <Navigate to="/login" />}
               />
               <Route
                 path="/posts/create"

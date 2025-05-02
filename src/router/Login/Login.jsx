@@ -29,8 +29,8 @@ const Login = () => {
   }, [authError]);
   return (
     <div className={styles.login}>
-      <h1>Login</h1>
-      <p>log in to use the system</p>
+      <h1>Entrar</h1>
+      <p>Faça o login para postar</p>
       <form onSubmit={handleSubmit}>
         <label>
           <span>email:</span>
@@ -44,7 +44,7 @@ const Login = () => {
           />
         </label>
         <label>
-          <span>Password:</span>
+          <span>Senha:</span>
           <input
             type="password"
             name="password"
@@ -55,10 +55,10 @@ const Login = () => {
           />
         </label>
 
-        {!loading && <button className="btn">Login</button>}
+        {!loading && <button className="btn">Entrar</button>}
         {loading && (
           <button className="btn" disabled>
-            wait...
+            Aguarde...
           </button>
         )}
         {error && <p className="error">{error}</p>}

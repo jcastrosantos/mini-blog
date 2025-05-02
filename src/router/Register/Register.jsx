@@ -41,11 +41,11 @@ const Register = () => {
 
   return (
     <div className={styles.register}>
-      <h1>Register to post</h1>
-      <p>Create your username and tell your stories</p>
+      <h1>Cadastre-se para postar</h1>
+      <p>Crie seu usuário e compartilhe suas histórias</p>
       <form onSubmit={handleSubmit}>
         <label>
-          <span>Name:</span>
+          <span>Nome:</span>
           <input
             type="text"
             name="displayName"
@@ -58,7 +58,7 @@ const Register = () => {
           />
         </label>
         <label>
-          <span>email:</span>
+          <span>E-mail:</span>
           <input
             type="email"
             name="email"
@@ -69,7 +69,7 @@ const Register = () => {
           />
         </label>
         <label>
-          <span>Password:</span>
+          <span>Senha:</span>
           <input
             type="password"
             name="password"
@@ -80,7 +80,7 @@ const Register = () => {
           />
         </label>
         <label>
-          <span>Confirm Password:</span>
+          <span>Confirmação da senha:</span>
           <input
             type="password"
             name="confirmPassword"
@@ -90,10 +90,10 @@ const Register = () => {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </label>
-        {!loading && <button className="btn">sign on</button>}
+        {!loading && <button className="btn">Cadastrar</button>}
         {loading && (
           <button className="btn" disabled>
-            wait...
+            Aguarde...
           </button>
         )}
         {error && <p className="error">{error}</p>}
